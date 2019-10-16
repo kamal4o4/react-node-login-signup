@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "server": {
+    "host": "localhost",
+    "port": 3001
+  },
+  "jwt": {
+    "secret_key": "QdhZbgTCExyEn27sAGtlRfnr3D7NpBVQnhfk/B9RDwthVOzTyMqlI+vUMOjOfvFZiU9bmMLcF7b2W6LdBvC+q849w6mvz7px+d2IEljMTBUwmddXaFD0eYfEU+D3NichPR4GCzCDwbUtRaQ8VnMFP/90Nl6X7GLOO87vlbvFIvLbLJFDZb500zj5X6Ppa9sveyUTzy/J5OK6NHnQOLKJR32V1rJdi59W193fNqcaA0gCTBhKO5K/SuZqGLUtHikfHelqI7FWMkwDPdHcm94wQbWO55jck/cKTEMTj/Gu/Qe5HOYi5QSHTOs09ceUOOZFDiO6WFQvvEN/Ekj96kJSbA=="
+  },
+  "email": {
+    "username": "raysteedsinfotech@gmail.com",
+    "password": "Vs123#@!",
+    "accountName": "Raysteeds Infotech",
+    "verifyEmailUrl": "api/verifyEmail"
+  }
+}

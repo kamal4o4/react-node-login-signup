@@ -19,8 +19,8 @@ export class Login extends React.Component {
                     </div>
                 </div>
                 <div>
-                    Not Registered Yet. 
-                    <Link to="/signup" className="blue-text ml-1">SignUp here</Link>
+                    Not Registered Yet,
+                    <Link to="/signup" className="blue-text ml-1"> SignUp here</Link>
                 </div>
             </div>
         );

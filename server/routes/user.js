@@ -30,8 +30,15 @@ module.exports = [
         handler: UserController.create
     },
     {
-        method: 'POST',
-        path: '/api/verifyEmail',
+        method: 'GET',
+        path: '/api/verifyEmail/{token}',
+        config: {
+            validate: {
+                params: Joi.object({
+                    token: Joi.string().required(),
+                })
+            }
+        },
         handler: UserController.verifyEmail
     },
     {
@@ -41,7 +48,6 @@ module.exports = [
             validate: {
                 payload: Joi.object({
                     email: Joi.string().email({ minDomainSegments: 2 }).required(),
-                    password: Joi.string().max(20).required()
                 })
             }
         },

@@ -51,8 +51,6 @@ module.exports = {
                 email: payload.email
             });
             if (!user) return Boom.notFound('User does not exist. Please type valid email !!');
-            const isValid = Bcrypt.compareSync(payload.password, user.password);
-            if (!isValid) return Boom.unauthorized('Invalid Password !!');
             if (user.isVerified) return h.response("your email address is already verified");
             var token = jwt.sign({ name: user.name, email: user.email, scope: user.scope }, Config.jwt.secret_key, { expiresIn: '24h' });
             Mailer.sentMailVerificationLink(user, token);
@@ -65,16 +63,16 @@ module.exports = {
 
     verifyEmail: async (request, h) => {
         try {
-            let decoded = await jwt.verify(request.headers.authorization.split(" ")[1], Config.jwt.secret_key);
-            if (decoded === undefined) { return Boom.badRequest("Invalid verfication link!"); };
+            let decoded = await jwt.verify(request.params.token, Config.jwt.secret_key);
+            if (decoded === undefined) { return Boom.badRequest("Invalid verification link!"); };
             if (decoded.scope !== "Customer") return Boom.badRequest("Invalid verification link!");
             const user = await User.findOne({
                 email: decoded.email
             });
-            if (!user) return Boom.notFound('Invalid verfication link!');
-            if (user.isVerified) return h.response("Account is already verified!");
+            if (!user) return Boom.notFound('Invalid verification link!');
+            if (user.isVerified) return h.response("<h1>Account is already verified!</h1>");
             await User.update({ email: decoded.email }, { isVerified: true });
-            return h.response("Account is successfully verfied!");
+            return h.response("<h1>Account is successfully verified!</h1>");
         } catch (err) {
             console.log(err);
             return Boom.badImplementation(err);

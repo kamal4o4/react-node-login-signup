@@ -5,6 +5,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Login, Signup } from './login/index';
+import Dashboard from './dashboard';
 
 class Index extends Component {
   render() {
@@ -14,6 +15,7 @@ class Index extends Component {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/dashboard" component={Dashboard}/>
           </Switch>
         </div>
       </BrowserRouter>

@@ -15,7 +15,7 @@ module.exports = {
             if (!user) return Boom.notFound('User does not exist. Please type valid email !!');
             const isValid = Bcrypt.compareSync(payload.password, user.password);
             if (!isValid) return Boom.unauthorized('Invalid Password !!');
-            if (!user.isVerified) return h.response("Your email address is not verified. please verify your email address to proceed");
+            if (!user.isVerified) return Boom.unauthorized('Your email address is not verified. please verify your email address to proceed !!');
             return h.response(user);
         } catch (err) {
             console.log(err);
@@ -34,8 +34,7 @@ module.exports = {
                 password: hashPassword,
                 scope: payload.scope
             });
-            var token = jwt.sign({ name: payload.name, email: payload.email, scope: payload.scope }, Config.jwt.secret_key, { expiresIn: '24h' });
-            console.log('token sent in mail: ', token);
+            const token = jwt.sign({ name: payload.name, email: payload.email, scope: payload.scope }, Config.jwt.secret_key, { expiresIn: '24h' });
             Mailer.sentMailVerificationLink(payload, token);
             return h.response("Please confirm your mail id by clicking on link in email.");
         } catch (err) {

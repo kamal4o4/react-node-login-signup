@@ -31,7 +31,6 @@ export class Login extends React.Component {
         const { history } = this.props;
         try {
             const result = await axios.post(`http://localhost:3001/api/login`, form);
-            console.log('result', result);
             history.push('/dashboard');
         } catch (err) {
             const { response: { data } } = err;
@@ -70,7 +69,7 @@ export class Login extends React.Component {
                 {this.renderErrorMessage()}
                 <div>
                     Not Registered Yet,
-                    <Link to="/signup" className="blue-text ml-1"> SignUp here</Link>
+                    <Link to="/signup" className="blue-text ml-1"> SignUp here!</Link>
                 </div>
             </div>
         );

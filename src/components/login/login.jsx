@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import GoogleLoginButton from './SocialLogin/googleLogin';
 
 export class Login extends React.Component {
     constructor() {
@@ -38,6 +39,14 @@ export class Login extends React.Component {
         }
     }
 
+    handleSocialLogin = (user) => {
+        console.log(user);
+    }
+
+    handleSocialLoginFailure = (err) => {
+        console.error(err);
+    }
+
     renderErrorMessage() {
         const { message } = this.state;
         return (
@@ -70,6 +79,17 @@ export class Login extends React.Component {
                 <div>
                     Not Registered Yet,
                     <Link to="/signup" className="blue-text ml-1"> SignUp here!</Link>
+                </div>
+                <div>
+                    Or,
+                    <GoogleLoginButton
+                        provider='google'
+                        appId='168132237101-9sjlf9a6icdn7rn4bjivb08ms2ok2f4i.apps.googleusercontent.com'
+                        onLoginSuccess={this.handleSocialLogin}
+                        onLoginFailure={this.handleSocialLoginFailure}
+                    >
+                        Login with Google
+                    </GoogleLoginButton>
                 </div>
             </div>
         );
